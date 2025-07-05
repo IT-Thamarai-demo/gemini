@@ -22,6 +22,25 @@
     }
 }
 
+@media (max-width: 600px) {
+    #input-container {
+        padding: 8px;
+        gap: 8px;
+    }
+
+    #userInput {
+        font-size: 15px;
+        padding: 10px 12px;
+        min-height: 20px;
+        max-height: 80px;
+    }
+
+    #sendButton {
+        width: 44px;
+        height: 44px;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     * {
         animation-duration: 0.01ms !important;
@@ -69,6 +88,7 @@ body {
         transform: translateX(-50%) translateY(100px);
         opacity: 0;
     }
+
     to {
         transform: translateX(-50%) translateY(0);
         opacity: 1;
@@ -169,6 +189,7 @@ header {
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -184,7 +205,7 @@ header {
 
 .assistant-message {
     align-self: flex-start;
-    background-color: var(--assistant-bubble);
+
 }
 
 .assistant-thinking {
@@ -216,9 +237,13 @@ header {
 }
 
 @keyframes bounce {
-    0%, 60%, 100% {
+
+    0%,
+    60%,
+    100% {
         transform: translateY(0);
     }
+
     30% {
         transform: translateY(-5px);
     }
@@ -400,6 +425,17 @@ pre code {
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
+.loading-text {
+    margin-top: 16px;
+    font-size: 18px;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+/* Spinner animation */
+.loading-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}   
 
 @keyframes spin {
     to {
@@ -419,7 +455,12 @@ pre code {
     }
 }
 
-/* Accessibility focus styles */
+/* Focus styles */
+:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
 :focus-visible {
     outline: 2px solid var(--primary-color);
     outline-offset: 2px;
