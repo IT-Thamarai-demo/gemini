@@ -185,7 +185,6 @@ header {
 .assistant-message {
     align-self: flex-start;
     background-color: var(--assistant-bubble);
-    
 }
 
 .assistant-thinking {
