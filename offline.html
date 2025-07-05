@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4285f4">
+    <title>Offline | Gemini Flash ProMode</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" href="images/icon-192x192.png" type="image/png" sizes="192x192">
+    <link rel="apple-touch-icon" href="images/icon-192x192.png">
+    <style>
+        /* Inline critical styles for offline reliability */
+        .offline-container {
+            text-align: center;
+            padding: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .offline-icon {
+            font-size: 72px;
+            color: #4285f4;
+            margin-bottom: 20px;
+        }
+        .offline-title {
+            color: #4285f4;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+        .offline-message {
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+        .offline-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .offline-button {
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .offline-button.secondary {
+            background-color: transparent;
+            color: #4285f4;
+            border: 1px solid #4285f4;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #202124;
+                color: #e8eaed;
+            }
+            .offline-button.secondary {
+                color: #8ab4f8;
+                border-color: #8ab4f8;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">⚡</div>
+        <h1 class="offline-title">Gemini Flash ProMode</h1>
+        <p class="offline-message">
+            You're currently offline. Please check your internet connection to access the full features of Gemini Flash ProMode.
+        </p>
+        <div class="offline-actions">
+            <button class="offline-button" onclick="window.location.reload()">Retry Connection</button>
+            <a href="/" class="offline-button secondary">Return to Home</a>
+        </div>
+        <p class="offline-message" style="margin-top: 32px; font-size: 14px;">
+            Some basic functionality may be available offline. Your conversations will sync when you reconnect.
+        </p>
+    </div>
+
+    <script>
+        // Simple offline detection with retry logic
+        document.querySelector('.offline-button').addEventListener('click', function() {
+            if (!navigator.onLine) {
+                alert('Still offline. Please check your network connection.');
+            }
+        });
+
+        // Update UI when connection status changes
+        window.addEventListener('online', () => {
+            window.location.reload();
+        });
+
+        // Check if service worker is registered
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.ready.then(registration => {
+                if (!registration.active) {
+                    document.querySelector('.offline-message').textContent += 
+                        '\nService worker not active. Please check your browser settings.';
+                }
+            });
+        }
+    </script>
+    <script src="app.js"></script>
+</body>
+</html>
