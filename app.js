@@ -1,5 +1,5 @@
 // System prompt for Gemini Flash ProMode
-const prompt = `
+const systemPrompt = `
 Omni-AGI System Directive v12.7.5
 "Perfection through recursive self-optimization."
 
